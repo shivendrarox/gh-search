@@ -57,9 +57,14 @@ const SearhBar  = ({placeholder}) => {
         <div className="dataResult">
           {filteredRepos.map((value) => {
             return (
-              <a key={value.id} className="dataItem" href={value.html_url} target="_blank">
-                <p>{value.name} </p>
-              </a>
+              <div key={value.id} className={styles.dataItem} >
+                <a href={value.html_url} target="_blank" >{value.name} </a>
+                <div>
+                <button>X</button>
+                <button>&#10084;</button>
+                </div>
+             
+              </div>
             );
           })}
         </div>
