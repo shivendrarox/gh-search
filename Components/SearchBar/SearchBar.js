@@ -1,7 +1,8 @@
 import {useState} from 'react'
-import styles from "./styles.module.scss"
-import axios from "axios"
-const SearhBar  = ({placeholder,inputData}) => {
+import styles from "./styles.module.css"
+import { Octokit, App } from "octokit";
+
+const SearhBar  = ({placeholder}) => {
     const [filteredRepos,setFilteredRepos] = useState([])
     const [userInput,setUserInput] = useState("")
 
@@ -9,7 +10,12 @@ const SearhBar  = ({placeholder,inputData}) => {
         const searchTerm = event.target.value
         setUserInput(searchTerm)
         try{
-            let dataFromGh = await axios.get(`https://api.github.com/search/repositories?q=mozilla&per_page=10`)
+              const octokit = new Octokit({
+                auth: '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'
+              })
+              
+            let dataFromGh = await octokit.request(`GET /search/repositories?q=${searchTerm}&per_page=10`, {})
+
             const newFilteredRepos = dataFromGh.data.items.filter((value)=>{
                 return value.name.toLowerCase().includes(searchTerm.toLowerCase());
             })
@@ -31,7 +37,34 @@ const SearhBar  = ({placeholder,inputData}) => {
   }
 
   return(<>
-  
+    <div>
+        <div className={styles.searchField} >
+        <input
+          type="text"
+          placeholder={placeholder}
+          value={userInput}
+          onChange={handleFilter}
+        />
+        {filteredRepos.length === 0 ? (
+            // <SearchIcon />
+            <div>SearchIcon</div>
+          ) : 
+          (
+            <div onClick={resetSearchBar} >Clear</div>
+          )}
+        </div>
+        {filteredRepos.length != 0 && (
+        <div className="dataResult">
+          {filteredRepos.map((value) => {
+            return (
+              <a key={value.id} className="dataItem" href={value.html_url} target="_blank">
+                <p>{value.name} </p>
+              </a>
+            );
+          })}
+        </div>
+      )}
+    </div>
   </>)
 }
 

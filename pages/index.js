@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-
+import SearhBar from '../Components/SearchBar/SearchBar'
 export default function Home() {
   return (
     <div className={styles.container}>
@@ -21,7 +21,7 @@ export default function Home() {
         <br/>
         Mark favourites and visit them <a href="/favourites">here</a>
         </p>
-
+          <SearhBar/>
 
       </main>
     </div>
