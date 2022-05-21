@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import styles from "./styles.module.css"
 import { Octokit, App } from "octokit";
 
@@ -7,10 +7,14 @@ const SearhBar  = ({placeholder}) => {
     const [userInput,setUserInput] = useState("")
     const [favList, setFavList] = useState([])
 
+    useEffect(()=>{
+        localStorage.setItem('favListLS', JSON.stringify(favList));
+    },[favList])
+
     function containsObject(obj, list) {
         let i;
         for (i = 0; i < list.length; i++) {
-            if (list[i].name === obj.name) {
+            if (list[i].url === obj.url) {
                 return true;
             }
         }
