@@ -5,6 +5,28 @@ import { Octokit, App } from "octokit";
 const SearhBar  = ({placeholder}) => {
     const [filteredRepos,setFilteredRepos] = useState([])
     const [userInput,setUserInput] = useState("")
+    const [favList, setFavList] = useState([])
+
+    function containsObject(obj, list) {
+        let i;
+        for (i = 0; i < list.length; i++) {
+            if (list[i].name === obj.name) {
+                return true;
+            }
+        }
+    
+        return false;
+    }
+
+    const favListHandler = (actionForList,value)=>{
+        if(actionForList==="ADD"){
+            setFavList([...favList,{name:value.name,url:value.html_url}])
+        }
+
+        if(actionForList==="REMOVE"){
+            setFavList(favList.filter(function(ele){return ele.name!=value.name}))
+        }
+    }
 
     const handleFilter = async (event)=>{
         const searchTerm = event.target.value
@@ -60,8 +82,11 @@ const SearhBar  = ({placeholder}) => {
               <div key={value.id} className={styles.dataItem} >
                 <a href={value.html_url} target="_blank" >{value.name} </a>
                 <div>
-                <button>X</button>
-                <button>&#10084;</button>
+                {containsObject({"name":value.name,"url":value.html_url},favList)?
+                <button onClick={()=>favListHandler("REMOVE",value)} >X</button>
+                :
+                <button onClick={()=>favListHandler("ADD",value)}>&#10084;</button>}
+
                 </div>
              
               </div>
