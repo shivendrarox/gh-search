@@ -34,7 +34,7 @@ const SearhBar  = ({placeholder}) => {
 
         if(actionForList==="REMOVE"){
             setFavList(favList.filter(function(ele){return ele.name!=value.name}))
-            window.localStorage.setItem(favList.filter(function(ele){return ele.name!=value.name}))
+            window.localStorage.setItem('favListLocalStorage',JSON.stringify(favList.filter(function(ele){return ele.name!=value.name})))
         }
     }
 
