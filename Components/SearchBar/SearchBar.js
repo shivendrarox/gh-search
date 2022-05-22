@@ -7,8 +7,12 @@ const SearhBar  = ({placeholder}) => {
     const [userInput,setUserInput] = useState("")
     const [favList, setFavList] = useState([])
 
+    useEffect(() => {
+         setFavList(JSON.parse(window.localStorage.getItem('favListLocalStorage')))
+      }, [])
+
     useEffect(()=>{
-        localStorage.setItem('favListLS', JSON.stringify(favList));
+        // window.localStorage.setItem('favListLocalStorage',JSON.stringify(favList))
     },[favList])
 
     function containsObject(obj, list) {
@@ -25,10 +29,12 @@ const SearhBar  = ({placeholder}) => {
     const favListHandler = (actionForList,value)=>{
         if(actionForList==="ADD"){
             setFavList([...favList,{name:value.name,url:value.html_url}])
+            window.localStorage.setItem('favListLocalStorage',JSON.stringify([...favList,{name:value.name,url:value.html_url}]))
         }
 
         if(actionForList==="REMOVE"){
             setFavList(favList.filter(function(ele){return ele.name!=value.name}))
+            window.localStorage.setItem(favList.filter(function(ele){return ele.name!=value.name}))
         }
     }
 
