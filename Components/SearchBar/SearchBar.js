@@ -14,9 +14,9 @@ const SearhBar  = ({placeholder}) => {
          setFavList(JSON.parse(window.localStorage.getItem('favListLocalStorage'))??[])
       }, [])
 
-    useEffect(()=>{
-         //window.localStorage.setItem('favListLocalStorage',JSON.stringify(favList))
-    },[favList])
+    // useEffect(()=>{
+    //      //window.localStorage.setItem('favListLocalStorage',JSON.stringify(favList))
+    // },[favList])
 
     function containsObject(obj, list) {
         let i;
