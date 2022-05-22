@@ -11,11 +11,11 @@ const SearhBar  = ({placeholder}) => {
     const favListRedux  = useSelector(state=>state.favList)
     const dispatch = useDispatch()
     useEffect(() => {
-         setFavList(JSON.parse(window.localStorage.getItem('favListLocalStorage')))
+         setFavList(JSON.parse(window.localStorage.getItem('favListLocalStorage'))??[])
       }, [])
 
     useEffect(()=>{
-        // window.localStorage.setItem('favListLocalStorage',JSON.stringify(favList))
+         //window.localStorage.setItem('favListLocalStorage',JSON.stringify(favList))
     },[favList])
 
     function containsObject(obj, list) {
@@ -74,7 +74,6 @@ const SearhBar  = ({placeholder}) => {
   }
 
   return(<>
-  {console.log(favListRedux)}
     <div>
         <div className={styles.searchField} >
         <input
