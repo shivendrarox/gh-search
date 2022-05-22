@@ -1,15 +1,15 @@
 import {useState,useEffect} from 'react'
 import styles from "./styles.module.css"
 import { Octokit, App } from "octokit";
-import {useSelector} from "react-redux"
-
+import {useSelector,useDispatch} from "react-redux"
+import {addItem,removeItem} from "../../actions"
 const SearhBar  = ({placeholder}) => {
     const [filteredRepos,setFilteredRepos] = useState([])
     const [userInput,setUserInput] = useState("")
     const [favList, setFavList] = useState([])
 
     const favListRedux  = useSelector(state=>state.favList)
-
+    const dispatch = useDispatch()
     useEffect(() => {
          setFavList(JSON.parse(window.localStorage.getItem('favListLocalStorage')))
       }, [])
@@ -31,11 +31,13 @@ const SearhBar  = ({placeholder}) => {
 
     const favListHandler = (actionForList,value)=>{
         if(actionForList==="ADD"){
+            dispatch(addItem({name:value.name,url:value.html_url}))
             setFavList([...favList,{name:value.name,url:value.html_url}])
             window.localStorage.setItem('favListLocalStorage',JSON.stringify([...favList,{name:value.name,url:value.html_url}]))
         }
 
         if(actionForList==="REMOVE"){
+            dispatch(removeItem({name:value.name,url:value.html_url}))
             setFavList(favList.filter(function(ele){return ele.name!=value.name}))
             window.localStorage.setItem('favListLocalStorage',JSON.stringify(favList.filter(function(ele){return ele.name!=value.name})))
         }

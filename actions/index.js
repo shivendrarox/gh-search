@@ -1,11 +1,13 @@
-export const addItem = () =>{
+export const addItem = (listItem) =>{
     return {
-        type:"ADD"
+        type:"ADD",
+        payload:listItem
     }
 }
 
-export const removeItem = () =>{
+export const removeItem = (listItem) =>{
     return {
-        type:"REMOVE"
+        type:"REMOVE",
+        payload:listItem
     }
 }

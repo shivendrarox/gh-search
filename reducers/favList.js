@@ -1,9 +1,9 @@
-const favListReducer = (state = [],action,listItem)=>{
+const favListReducer = (state = [],action)=>{
     switch(action.type){
         case  "ADD":
-            return state.push(listItem)
+            return [...state,action.payload]
         case "REMOVE":
-            return state.filter(function(ele){return ele.name!=listItem.name})
+            return state.filter(function(ele){return ele.name!=action.payload.name})
         default:
             return state
     }
