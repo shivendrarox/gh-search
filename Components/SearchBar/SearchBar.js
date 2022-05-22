@@ -1,11 +1,14 @@
 import {useState,useEffect} from 'react'
 import styles from "./styles.module.css"
 import { Octokit, App } from "octokit";
+import {useSelector} from "react-redux"
 
 const SearhBar  = ({placeholder}) => {
     const [filteredRepos,setFilteredRepos] = useState([])
     const [userInput,setUserInput] = useState("")
     const [favList, setFavList] = useState([])
+
+    const favListRedux  = useSelector(state=>state.favList)
 
     useEffect(() => {
          setFavList(JSON.parse(window.localStorage.getItem('favListLocalStorage')))
@@ -69,6 +72,7 @@ const SearhBar  = ({placeholder}) => {
   }
 
   return(<>
+  {console.log(favListRedux)}
     <div>
         <div className={styles.searchField} >
         <input
