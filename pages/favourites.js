@@ -1,6 +1,6 @@
 import styles from '../styles/Fav.module.css'
 import Head from 'next/head'
-import FavListComponent from '../Components/favListComponent/index'
+import FavListComponent from '../Components/FavListComponent/FavListComponent'
 import axios from "axios"
 import {useState, useEffect} from "react"
 const Favourites = ()=>{
