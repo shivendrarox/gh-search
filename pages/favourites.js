@@ -1,9 +1,10 @@
 import styles from '../styles/Fav.module.css'
 import Head from 'next/head'
 import FavListComponent from '../Components/FavListComponent/FavListComponent'
-import axios from "axios"
+import { useRouter } from 'next/router'
 import {useState, useEffect} from "react"
 const Favourites = ()=>{
+  const router = useRouter()
     const [favListLocal, setFavListLocal] = useState([])
 
     useEffect(() => {
@@ -23,6 +24,7 @@ const Favourites = ()=>{
 
            window.localStorage.setItem('favListLocalStorage',resobj.userFavListExport)
          };
+         router.reload()
       }
 
 
