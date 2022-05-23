@@ -3,7 +3,7 @@ import styles from "./styles.module.css"
 import {useDispatch} from "react-redux"
 import {removeItem} from "../../actions"
 const FavListComponent  = ({favListProp}) => {
-    const [favList, setFavList] = useState([...favListProp])
+    const [favList, setFavList] = useState([...favListProp??[]])
 
     const dispatch = useDispatch()
     useEffect(() => {

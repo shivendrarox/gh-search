@@ -39,13 +39,14 @@ return(<>
         <h1 className={styles.titl1e}>
         Your Favs
         </h1>
+        {(favListLocal?.length??0) >0&&
         <div>
         <form className={styles.form_container} action="https://fierce-json-maker.glitch.me/generate-settings" method="post" target="_blank">
             <input hidden defaultValue={JSON.stringify(favListLocal)} type="text" id="userFavListExport" name="userFavListExport"/>
             <p>Download your favs</p>
             <input style={{display:"block",margin:'auto'}} type="submit" value="Download"/>
         </form>
-        </div>
+        </div>}
 
         <div className={styles.form_container} >
         <p style={{textAlign:"center"}} >Import your favs</p>
