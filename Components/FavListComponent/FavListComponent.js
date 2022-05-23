@@ -8,7 +8,7 @@ const FavListComponent  = ({favListProp}) => {
     const dispatch = useDispatch()
     useEffect(() => {
          setFavList(JSON.parse(window.localStorage.getItem('favListLocalStorage'))??[])
-      }, [])
+      }, [favListProp])
 
     function containsObject(obj, list) {
         let i;

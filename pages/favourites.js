@@ -53,7 +53,7 @@ return(<>
         <input accept="application/JSON"  type="file" onChange={(e)=>settingsImport(e)} />
         </div>
 
-         <FavListComponent favListProp={favListLocal} />
+        {favListLocal&&  <FavListComponent favListProp={favListLocal} />}
 
       </main>
     </div>
