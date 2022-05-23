@@ -6,7 +6,9 @@ import {useState, useEffect} from "react"
 const Favourites = ()=>{
     const [favListLocal, setFavListLocal] = useState([])
 
-      
+    useEffect(() => {
+      setFavListLocal(JSON.parse(window.localStorage.getItem('favListLocalStorage'))??[])
+    }, [])
 
      const settingsImport = (e) => {
          e.preventDefault()
