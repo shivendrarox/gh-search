@@ -48,7 +48,7 @@ const SearhBar  = ({placeholder}) => {
         setUserInput(searchTerm)
         try{
               const octokit = new Octokit({
-                auth: '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'
+                auth: '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'
               })
               
             let dataFromGh = await octokit.request(`GET /search/repositories?q=${searchTerm}&per_page=10`, {})
