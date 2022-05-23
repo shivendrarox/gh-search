@@ -84,14 +84,14 @@ const SearhBar  = ({placeholder}) => {
         />
         {filteredRepos.length === 0 ? (
             // <SearchIcon />
-            <div>SearchIcon</div>
+            <div style={{marginLeft:"10px",cursor:"pointer"}}  >&#128269;</div>
           ) : 
           (
-            <div onClick={resetSearchBar} >Clear</div>
+            <div style={{marginLeft:"10px",cursor:"pointer"}} onClick={resetSearchBar} >X</div>
           )}
         </div>
         {filteredRepos.length != 0 && (
-        <div className="dataResult">
+        <div className={styles.dataResult}>
           {filteredRepos.map((value) => {
             return (
               <div key={value.id} className={styles.dataItem} >

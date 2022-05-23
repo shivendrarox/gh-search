@@ -41,11 +41,11 @@ const FavListComponent  = ({favListProp}) => {
     <div>
 
         {favList.length != 0 && (
-        <div className="dataResult">
+        <div className={styles.dataResult}>
           {favList.map((value) => {
             return (<>
                         {!containsObject({"name":value.name,"url":value.html_url},favList)?
-              <div key={value.id} className={styles.dataItem} >
+              <div style={{width:"200px"}} key={value.id} className={styles.dataItem} >
                 <a href={value.html_url} target="_blank" >{value.name} </a>
                 <div>
 

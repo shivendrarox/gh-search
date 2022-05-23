@@ -1,10 +1,9 @@
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Fav.module.css'
 import Head from 'next/head'
 import FavListComponent from '../Components/favListComponent/index'
 import axios from "axios"
 import {useState, useEffect} from "react"
 const Favourites = ()=>{
-    const [exportError,setExportError] = useState(false)
     const [favListLocal, setFavListLocal] = useState([])
 
       
@@ -24,28 +23,7 @@ const Favourites = ()=>{
          console.log(favListLocal)
       }
 
-    const exportFavs = () =>{
-        let data = localStorage.getItem("favListLocalStorage");
-          
-          var config = {
-            method: 'post',
-            url: 'https://fierce-json-maker.glitch.me/generate-settings',
-            headers: { 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
-          
-          axios(config)
-          .then(function (response) {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch(function (error) {
-            setExportError(true)
-            console.log(error);
-          });
-          
-    }
+
 
 return(<>
           <div className={styles.container}>
@@ -56,27 +34,20 @@ return(<>
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h1 className={styles.titl1e}>
         Your Favs
         </h1>
         <div>
-        <form action="https://fierce-json-maker.glitch.me/generate-settings" method="post" target="_blank">
+        <form className={styles.form_container} action="https://fierce-json-maker.glitch.me/generate-settings" method="post" target="_blank">
             <input hidden defaultValue={JSON.stringify(favListLocal)} type="text" id="userFavListExport" name="userFavListExport"/>
-            <input type="submit" value="export your favs"/>
+            <p>Download your favs</p>
+            <input style={{display:"block",margin:'auto'}} type="submit" value="Download"/>
         </form>
-            {/* <button onClick={()=>{exportFavs()}} >export your favs</button> */}
-            {/* {exportError&&<p styles={{color:"red"}} >Please Try Again</p>} */}
         </div>
 
-        <div>
-        {/* <form target="_blank" onSubmit={} action="https://fierce-json-maker.glitch.me/import-settings" method="post" enctype="multipart/form-data">
-            <input type="file" id="settingsfile" name="settingsfile"/>
-            <input type="submit" value="import your favs"/>
-        </form> */}
-        <input type="file" onChange={(e)=>settingsImport(e)} />
-
-            {/* <button onClick={()=>{exportFavs()}} >export your favs</button> */}
-            {/* {exportError&&<p styles={{color:"red"}} >Please Try Again</p>} */}
+        <div className={styles.form_container} >
+        <p style={{textAlign:"center"}} >Import your favs</p>
+        <input accept="application/JSON"  type="file" onChange={(e)=>settingsImport(e)} />
         </div>
 
          <FavListComponent favListProp={favListLocal} />
