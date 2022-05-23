@@ -46,7 +46,7 @@ const FavListComponent  = ({favListProp}) => {
             return (<>
                         {!containsObject({"name":value.name,"url":value.html_url},favList)?
               <div style={{width:"200px"}} key={value.id} className={styles.dataItem} >
-                <a href={value.html_url} target="_blank" >{value.name} </a>
+                <a href={value.html_url} rel="noreferrer" target="_blank" >{value.name} </a>
                 <div>
 
                 <button onClick={()=>favListHandler("REMOVE",value)} >X</button>

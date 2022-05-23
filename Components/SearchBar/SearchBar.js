@@ -95,7 +95,7 @@ const SearhBar  = ({placeholder}) => {
           {filteredRepos.map((value) => {
             return (
               <div key={value.id} className={styles.dataItem} >
-                <a href={value.html_url} target="_blank" >{value.name} </a>
+                <a href={value.html_url} rel="noreferrer" target="_blank" >{value.name} </a>
                 <div>
                 {containsObject({"name":value.name,"url":value.html_url},favList)?
                 <button onClick={()=>favListHandler("REMOVE",value)} >X</button>
