@@ -7,7 +7,7 @@ const Favourites = ()=>{
     const [favListLocal, setFavListLocal] = useState([])
 
     useEffect(() => {
-      setFavListLocal(JSON.parse(window.localStorage.getItem('favListLocalStorage'))??[])
+      setFavListLocal(JSON.parse(window.localStorage.getItem('favListLocalStorage')))
     }, [])
 
      const settingsImport = (e) => {
@@ -17,12 +17,10 @@ const Favourites = ()=>{
          fileReader.onload = e => {
            
            const resobj = JSON.parse(e.target.result)
-           console.log("e.target.result", typeof resobj.userFavListExport);
            setFavListLocal(JSON.parse(resobj.userFavListExport));
 
            window.localStorage.setItem('favListLocalStorage',resobj.userFavListExport)
          };
-         console.log(favListLocal)
       }
 
 
