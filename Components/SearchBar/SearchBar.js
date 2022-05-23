@@ -1,8 +1,8 @@
 import {useState,useEffect} from 'react'
 import styles from "./styles.module.css"
-import { Octokit, App } from "octokit";
 import {useSelector,useDispatch} from "react-redux"
 import {addItem,removeItem} from "../../actions"
+import axios from 'axios';
 const SearhBar  = ({placeholder}) => {
     const [filteredRepos,setFilteredRepos] = useState([])
     const [userInput,setUserInput] = useState("")
@@ -47,11 +47,10 @@ const SearhBar  = ({placeholder}) => {
         const searchTerm = event.target.value
         setUserInput(searchTerm)
         try{
-              const octokit = new Octokit({
-                auth: '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'
-              })
               
-            let dataFromGh = await octokit.request(`GET /search/repositories?q=${searchTerm}&per_page=10`, {})
+            let dataFromGh = await axios.post('https://fierce-json-maker.glitch.me/search', {
+              'searchTerm': searchTerm,
+            })
 
             const newFilteredRepos = dataFromGh.data.items.filter((value)=>{
                 return value.name.toLowerCase().includes(searchTerm.toLowerCase());
