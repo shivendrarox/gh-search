@@ -6,9 +6,6 @@ import {useState, useEffect} from "react"
 const Favourites = ()=>{
     const [exportError,setExportError] = useState(false)
     const [favListLocal, setFavListLocal] = useState([])
-    // useEffect(() => {
-    //     setFavListLocal(JSON.parse(window.localStorage.getItem('favListLocalStorage'))??[])
-    //   }, [])
 
       
 
@@ -20,7 +17,7 @@ const Favourites = ()=>{
            
            const resobj = JSON.parse(e.target.result)
            console.log("e.target.result", typeof resobj.userFavListExport);
-           setFavListLocal((resobj.userFavListExport));
+           setFavListLocal(JSON.parse(resobj.userFavListExport));
 
            window.localStorage.setItem('favListLocalStorage',resobj.userFavListExport)
          };
@@ -82,7 +79,7 @@ return(<>
             {/* {exportError&&<p styles={{color:"red"}} >Please Try Again</p>} */}
         </div>
 
-        <FavListComponent/>
+         <FavListComponent favListProp={favListLocal} />
 
       </main>
     </div>

@@ -1,21 +1,14 @@
 import {useState,useEffect} from 'react'
 import styles from "./styles.module.css"
-import {useSelector,useDispatch} from "react-redux"
-import {addItem,removeItem} from "../../actions"
-const FavListComponent  = ({placeholder}) => {
-    const [filteredRepos,setFilteredRepos] = useState([])
-    const [userInput,setUserInput] = useState("")
-    const [favList, setFavList] = useState([])
+import {useDispatch} from "react-redux"
+import {removeItem} from "../../actions"
+const FavListComponent  = ({favListProp}) => {
+    const [favList, setFavList] = useState([...favListProp])
 
-    const favListRedux  = useSelector(state=>state.favList)
     const dispatch = useDispatch()
     useEffect(() => {
          setFavList(JSON.parse(window.localStorage.getItem('favListLocalStorage'))??[])
-      }, [])
-
-    // useEffect(()=>{
-    //      //window.localStorage.setItem('favListLocalStorage',JSON.stringify(favList))
-    // },[favList])
+      }, [favList])
 
     function containsObject(obj, list) {
         let i;
@@ -29,11 +22,11 @@ const FavListComponent  = ({placeholder}) => {
     }
 
     const favListHandler = (actionForList,value)=>{
-        if(actionForList==="ADD"){
-            dispatch(addItem({name:value.name,url:value.html_url}))
-            setFavList([...favList,{name:value.name,url:value.html_url}])
-            window.localStorage.setItem('favListLocalStorage',JSON.stringify([...favList,{name:value.name,url:value.html_url}]))
-        }
+        // if(actionForList==="ADD"){
+        //     dispatch(addItem({name:value.name,url:value.html_url}))
+        //     setFavList([...favList,{name:value.name,url:value.html_url}])
+        //     window.localStorage.setItem('favListLocalStorage',JSON.stringify([...favList,{name:value.name,url:value.html_url}]))
+        // }
 
         if(actionForList==="REMOVE"){
             dispatch(removeItem({name:value.name,url:value.html_url}))
